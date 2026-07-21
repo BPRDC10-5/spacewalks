@@ -8,7 +8,7 @@ input_file = open('./eva-data.json', 'r', encoding='ascii')
 output_file = open('./eva-data.csv','w', encoding="utf-8")
 graph_file = './cumulative_eva_graph.png'
 
-fieldnames = ("EVA #", "Country", "Crew    ", "Vehicle", "Date", "Duration", "Purpose")
+data = []
 
 for i in range(375):
     line=input_file.readline()
@@ -34,7 +34,7 @@ for i in data:
             pass
         else:
             duration_dt=dt.datetime.strptime(duration_str,'%H:%M')
-            duration_hours = dt.timedelta(hours=duration_dt.hour, minutes=duration_dt.minute, seconds=t.second).total_seconds()/(60*60)
+            duration_hours = dt.timedelta(hours=duration_dt.hour, minutes=duration_dt.minute, seconds=duration_dt.second).total_seconds()/(60*60)
             print(duration_dt, duration_hours)
             time.append(duration_hours)
             if 'date' in data[j].keys():
@@ -59,3 +59,5 @@ plt.tight_layout()
 plt.savefig(graph_file)
 plt.show()
 
+
+ 
